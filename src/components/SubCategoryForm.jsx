@@ -19,6 +19,20 @@ function SubCategoryForm({
 
       <div className="card-body">
         <form onSubmit={handleSubmit}>
+          {/* Sub Category Name */}
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Sub Category Name</label>
+
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Sub Category Name"
+              value={subCategoryName}
+              onChange={(e) => setSubCategoryName(e.target.value)}
+            />
+          </div>
+
           {/* Category Dropdown */}
 
           <div className="mb-3">
@@ -37,20 +51,6 @@ function SubCategoryForm({
                 </option>
               ))}
             </select>
-          </div>
-
-          {/* Sub Category Name */}
-
-          <div className="mb-3">
-            <label className="form-label fw-semibold">Sub Category Name</label>
-
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter Sub Category Name"
-              value={subCategoryName}
-              onChange={(e) => setSubCategoryName(e.target.value)}
-            />
           </div>
 
           {/* Status */}
@@ -74,10 +74,10 @@ function SubCategoryForm({
           {/* Submit Button */}
 
           <button
-            type="submit"
-            className={`btn ${editId ? "btn-warning" : "btn-primary"} w-100`}
+            className={`btn btn-sm ${editId ? "btn-warning" : "btn-primary"}`}
+            style={{ width: "6rem" }}
           >
-            {editId ? "Update Sub Category" : "Add Sub Category"}
+            {editId ? "Update" : "Save"}
           </button>
         </form>
       </div>

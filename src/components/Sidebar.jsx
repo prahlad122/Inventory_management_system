@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { NavLink } from "react-router-dom";
 import { Offcanvas } from "bootstrap";
 
 function Sidebar() {
   const [masterOpen, setMasterOpen] = useState(true);
+  const bsInstanceRef = useRef(null);
+
+  // One persistent instance, created once. No manual class/style
+  // manipulation anywhere — Bootstrap owns its own show/hide state.
+  useEffect(() => {
+    const el = document.getElementById("sidebar");
+    if (el) {
+      bsInstanceRef.current = Offcanvas.getOrCreateInstance(el);
+    }
+  }, []);
 
   const closeSidebar = () => {
-    const sidebar = document.getElementById("sidebar");
-
-    if (sidebar) {
-      const bsOffcanvas = Offcanvas.getOrCreateInstance(sidebar);
-
-      bsOffcanvas.hide();
-    }
+    bsInstanceRef.current?.hide();
   };
 
   const menuClass = ({ isActive }) =>
@@ -34,7 +38,7 @@ function Sidebar() {
             to="/dashboard"
             end
             className={menuClass}
-            data-bs-dismiss="offcanvas"
+            onClick={closeSidebar}
           >
             <i className="bi bi-speedometer2 me-2"></i>
             Dashboard
@@ -42,7 +46,6 @@ function Sidebar() {
         </li>
 
         {/* Master */}
-
         <li className="nav-item">
           <button
             className="btn btn-dark w-100 text-start d-flex justify-content-between align-items-center"
@@ -52,11 +55,8 @@ function Sidebar() {
               <i className="bi bi-folder me-2"></i>
               Master
             </span>
-
             <i
-              className={`bi ${
-                masterOpen ? "bi-chevron-down" : "bi-chevron-right"
-              }`}
+              className={`bi ${masterOpen ? "bi-chevron-down" : "bi-chevron-right"}`}
             ></i>
           </button>
 
@@ -66,37 +66,34 @@ function Sidebar() {
                 <NavLink
                   to="/dashboard/master/category"
                   className={menuClass}
-                  data-bs-dismiss="offcanvas"
+                  onClick={closeSidebar}
                 >
                   Category Master
                 </NavLink>
               </li>
-
               <li>
                 <NavLink
                   to="/dashboard/master/subcategory"
                   className={menuClass}
-                  data-bs-dismiss="offcanvas"
+                  onClick={closeSidebar}
                 >
                   SubCategory Master
                 </NavLink>
               </li>
-
               <li>
                 <NavLink
                   to="/dashboard/master/item"
                   className={menuClass}
-                  data-bs-dismiss="offcanvas"
+                  onClick={closeSidebar}
                 >
                   Item Master
                 </NavLink>
               </li>
-
               <li>
                 <NavLink
                   to="/dashboard/master/tax"
                   className={menuClass}
-                  data-bs-dismiss="offcanvas"
+                  onClick={closeSidebar}
                 >
                   Tax Master
                 </NavLink>
@@ -110,7 +107,7 @@ function Sidebar() {
           <NavLink
             to="/dashboard/transaction"
             className={menuClass}
-            data-bs-dismiss="offcanvas"
+            onClick={closeSidebar}
           >
             <i className="bi bi-arrow-left-right me-2"></i>
             Transaction
@@ -122,7 +119,7 @@ function Sidebar() {
           <NavLink
             to="/dashboard/report"
             className={menuClass}
-            data-bs-dismiss="offcanvas"
+            onClick={closeSidebar}
           >
             <i className="bi bi-bar-chart me-2"></i>
             Report
@@ -137,10 +134,7 @@ function Sidebar() {
       {/* Desktop Sidebar */}
       <div
         className="bg-dark text-white d-none d-lg-block"
-        style={{
-          width: "260px",
-          minHeight: "100vh",
-        }}
+        style={{ width: "260px", minHeight: "100vh" }}
       >
         {sidebarContent}
       </div>
@@ -153,13 +147,11 @@ function Sidebar() {
       >
         <div className="offcanvas-header">
           <h5 className="text-white">Inventory</h5>
-
           <button
             className="btn-close btn-close-white"
             data-bs-dismiss="offcanvas"
           ></button>
         </div>
-
         <div className="offcanvas-body p-0">{sidebarContent}</div>
       </div>
     </>
