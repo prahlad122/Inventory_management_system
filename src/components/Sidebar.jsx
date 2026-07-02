@@ -1,8 +1,20 @@
 import { useState } from "react";
+
 import { NavLink } from "react-router-dom";
+import { Offcanvas } from "bootstrap";
 
 function Sidebar() {
   const [masterOpen, setMasterOpen] = useState(true);
+
+  const closeSidebar = () => {
+    const sidebar = document.getElementById("sidebar");
+
+    if (sidebar) {
+      const bsOffcanvas = Offcanvas.getOrCreateInstance(sidebar);
+
+      bsOffcanvas.hide();
+    }
+  };
 
   const menuClass = ({ isActive }) =>
     `nav-link text-white rounded px-3 py-2 mb-1 ${
@@ -11,21 +23,19 @@ function Sidebar() {
 
   const sidebarContent = (
     <div className="h-100 d-flex flex-column">
-
       <div className="p-3 border-bottom border-secondary">
-        <h5 className="text-white fw-bold mb-0">
-          Inventory
-        </h5>
+        <h5 className="text-white fw-bold mb-0">Inventory</h5>
       </div>
 
       <ul className="nav flex-column p-2">
-
         {/* Dashboard */}
         <li className="nav-item">
           <NavLink
             to="/dashboard"
             end
             className={menuClass}
+            onClick={closeSidebar}
+            onClick={closeSidebar}
           >
             <i className="bi bi-speedometer2 me-2"></i>
             Dashboard
@@ -33,8 +43,8 @@ function Sidebar() {
         </li>
 
         {/* Master */}
-        <li className="nav-item">
 
+        <li className="nav-item">
           <button
             className="btn btn-dark w-100 text-start d-flex justify-content-between align-items-center"
             onClick={() => setMasterOpen(!masterOpen)}
@@ -46,21 +56,18 @@ function Sidebar() {
 
             <i
               className={`bi ${
-                masterOpen
-                  ? "bi-chevron-down"
-                  : "bi-chevron-right"
+                masterOpen ? "bi-chevron-down" : "bi-chevron-right"
               }`}
             ></i>
           </button>
 
           {masterOpen && (
-
             <ul className="nav flex-column ms-3 mt-2">
-
               <li>
                 <NavLink
                   to="/dashboard/master/category"
                   className={menuClass}
+                  onClick={closeSidebar}
                 >
                   Category Master
                 </NavLink>
@@ -70,6 +77,7 @@ function Sidebar() {
                 <NavLink
                   to="/dashboard/master/subcategory"
                   className={menuClass}
+                  onClick={closeSidebar}
                 >
                   SubCategory Master
                 </NavLink>
@@ -79,6 +87,7 @@ function Sidebar() {
                 <NavLink
                   to="/dashboard/master/item"
                   className={menuClass}
+                  onClick={closeSidebar}
                 >
                   Item Master
                 </NavLink>
@@ -88,15 +97,13 @@ function Sidebar() {
                 <NavLink
                   to="/dashboard/master/tax"
                   className={menuClass}
+                  onClick={closeSidebar}
                 >
                   Tax Master
                 </NavLink>
               </li>
-
             </ul>
-
           )}
-
         </li>
 
         {/* Transaction */}
@@ -104,6 +111,7 @@ function Sidebar() {
           <NavLink
             to="/dashboard/transaction"
             className={menuClass}
+            onClick={closeSidebar}
           >
             <i className="bi bi-arrow-left-right me-2"></i>
             Transaction
@@ -115,14 +123,13 @@ function Sidebar() {
           <NavLink
             to="/dashboard/report"
             className={menuClass}
+            onClick={closeSidebar}
           >
             <i className="bi bi-bar-chart me-2"></i>
             Report
           </NavLink>
         </li>
-
       </ul>
-
     </div>
   );
 
@@ -133,7 +140,7 @@ function Sidebar() {
         className="bg-dark text-white d-none d-lg-block"
         style={{
           width: "260px",
-          minHeight: "100vh"
+          minHeight: "100vh",
         }}
       >
         {sidebarContent}
@@ -145,26 +152,16 @@ function Sidebar() {
         tabIndex="-1"
         id="sidebar"
       >
-
         <div className="offcanvas-header">
-
-          <h5 className="text-white">
-            Inventory
-          </h5>
+          <h5 className="text-white">Inventory</h5>
 
           <button
             className="btn-close btn-close-white"
             data-bs-dismiss="offcanvas"
           ></button>
-
         </div>
 
-        <div className="offcanvas-body p-0">
-
-          {sidebarContent}
-
-        </div>
-
+        <div className="offcanvas-body p-0">{sidebarContent}</div>
       </div>
     </>
   );

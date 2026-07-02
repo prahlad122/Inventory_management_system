@@ -7,22 +7,21 @@ function CategoryForm({
   editId,
 }) {
   return (
-    <div className="card shadow-sm border-0 rounded-3">
+    <div className="card shadow border-0 rounded-4">
 
-      {/* Card Header */}
-      <div className="card-header bg-primary text-white py-3">
+      <div className="card-header bg-primary text-white">
         <h5 className="mb-0">
           {editId ? "Update Category" : "Create Category"}
         </h5>
       </div>
 
-      {/* Card Body */}
       <div className="card-body">
 
         <form onSubmit={handleSubmit}>
 
           {/* Category Name */}
-          <div className="mb-4">
+
+          <div className="mb-3">
 
             <label className="form-label fw-semibold">
               Category Name
@@ -41,51 +40,45 @@ function CategoryForm({
           </div>
 
           {/* Status */}
+
           <div className="mb-4">
 
-            <label className="form-label fw-semibold d-block">
-              Status
-            </label>
-
-            <div className="form-check form-switch">
+            <div className="form-check">
 
               <input
                 className="form-check-input"
                 type="checkbox"
+                id="status"
                 checked={status}
-                onChange={() =>
-                  setStatus(!status)
+                onChange={(e) =>
+                  setStatus(e.target.checked)
                 }
               />
 
-              <label className="form-check-label">
-
-                {status ? "Active" : "Inactive"}
-
+              <label
+                className="form-check-label fw-semibold"
+                htmlFor="status"
+              >
+                Active
               </label>
 
             </div>
 
           </div>
 
-          {/* Buttons */}
+          {/* Button */}
 
-          <div className="d-grid">
-
-            <button
-              type="submit"
-              className={`btn ${
-                editId
-                  ? "btn-warning"
-                  : "btn-primary"
-              }`}
-            >
-              {editId
-                ? "Update Category"
-                : "Save Category"}
-            </button>
-
-          </div>
+          <button
+            className={`btn ${
+              editId
+                ? "btn-warning"
+                : "btn-primary"
+            } w-100`}
+          >
+            {editId
+              ? "Update Category"
+              : "Save Category"}
+          </button>
 
         </form>
 

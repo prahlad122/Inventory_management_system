@@ -10,7 +10,7 @@ function SubCategoryMaster() {
 
   const [subCategoryName, setSubCategoryName] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState(false);
 
   const [editId, setEditId] = useState(null);
 
@@ -77,12 +77,10 @@ function SubCategoryMaster() {
 
     setSubCategoryName("");
     setCategoryId("");
-    setStatus(true);
+    setStatus(false);
   };
 
-   
   // Delete
- 
 
   const handleDelete = (id) => {
     if (window.confirm("Delete Sub Category ?")) {
@@ -92,9 +90,7 @@ function SubCategoryMaster() {
     }
   };
 
- 
   // Edit
- 
 
   const handleEdit = (item) => {
     setSubCategoryName(item.subCategoryName);
