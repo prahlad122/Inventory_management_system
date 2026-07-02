@@ -34,8 +34,7 @@ function Sidebar() {
             to="/dashboard"
             end
             className={menuClass}
-            onClick={closeSidebar}
-            onClick={closeSidebar}
+            data-bs-dismiss="offcanvas"
           >
             <i className="bi bi-speedometer2 me-2"></i>
             Dashboard
@@ -67,7 +66,7 @@ function Sidebar() {
                 <NavLink
                   to="/dashboard/master/category"
                   className={menuClass}
-                  onClick={closeSidebar}
+                  data-bs-dismiss="offcanvas"
                 >
                   Category Master
                 </NavLink>
@@ -77,7 +76,7 @@ function Sidebar() {
                 <NavLink
                   to="/dashboard/master/subcategory"
                   className={menuClass}
-                  onClick={closeSidebar}
+                  data-bs-dismiss="offcanvas"
                 >
                   SubCategory Master
                 </NavLink>
@@ -87,7 +86,7 @@ function Sidebar() {
                 <NavLink
                   to="/dashboard/master/item"
                   className={menuClass}
-                  onClick={closeSidebar}
+                  data-bs-dismiss="offcanvas"
                 >
                   Item Master
                 </NavLink>
@@ -97,7 +96,7 @@ function Sidebar() {
                 <NavLink
                   to="/dashboard/master/tax"
                   className={menuClass}
-                  onClick={closeSidebar}
+                  data-bs-dismiss="offcanvas"
                 >
                   Tax Master
                 </NavLink>
@@ -111,7 +110,7 @@ function Sidebar() {
           <NavLink
             to="/dashboard/transaction"
             className={menuClass}
-            onClick={closeSidebar}
+            data-bs-dismiss="offcanvas"
           >
             <i className="bi bi-arrow-left-right me-2"></i>
             Transaction
@@ -123,7 +122,7 @@ function Sidebar() {
           <NavLink
             to="/dashboard/report"
             className={menuClass}
-            onClick={closeSidebar}
+            data-bs-dismiss="offcanvas"
           >
             <i className="bi bi-bar-chart me-2"></i>
             Report
