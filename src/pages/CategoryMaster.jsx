@@ -12,9 +12,9 @@ function CategoryMaster() {
 
   const [editId, setEditId] = useState(null);
 
-  // ===========================
+ 
   // Load Data From LocalStorage
-  // ===========================
+  
 
   useEffect(() => {
 
@@ -25,9 +25,9 @@ function CategoryMaster() {
 
   }, []);
 
-  // ===========================
+   
   // Save Data
-  // ===========================
+  
 
   useEffect(() => {
 
@@ -38,9 +38,9 @@ function CategoryMaster() {
 
   }, [categories]);
 
-  // ===========================
+   
   // Add / Update
-  // ===========================
+  
 
   const handleSubmit = (e) => {
 
