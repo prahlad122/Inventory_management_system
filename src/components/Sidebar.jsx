@@ -82,20 +82,20 @@ function Sidebar() {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/master/item"
-                  className={menuClass}
-                  onClick={closeSidebar}
-                >
-                  Item Master
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
                   to="/dashboard/master/tax"
                   className={menuClass}
                   onClick={closeSidebar}
                 >
                   Tax Master
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/master/item"
+                  className={menuClass}
+                  onClick={closeSidebar}
+                >
+                  Item Master
                 </NavLink>
               </li>
             </ul>

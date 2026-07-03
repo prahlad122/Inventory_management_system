@@ -6,11 +6,17 @@ function TaxList({
   return (
     <div className="card shadow border-0 rounded-4">
 
-      <div className="card-header bg-success text-white">
+      {/* Card Header */}
+
+      <div className="card-header bg-success text-white py-3">
+
         <h5 className="mb-0 fw-bold">
           Tax List
         </h5>
+
       </div>
+
+      {/* Card Body */}
 
       <div className="card-body">
 
@@ -22,17 +28,19 @@ function TaxList({
 
               <tr>
 
-                <th>#</th>
+                <th width="60">#</th>
 
                 <th>Tax Name</th>
 
-                <th>Percentage</th>
+                <th>Tax Type</th>
+
+                <th>GST %</th>
+
+                <th>Description</th>
 
                 <th>Status</th>
 
-                <th width="160">
-                  Action
-                </th>
+                <th width="150">Action</th>
 
               </tr>
 
@@ -45,10 +53,10 @@ function TaxList({
                 <tr>
 
                   <td
-                    colSpan="5"
+                    colSpan="7"
                     className="text-center py-4 text-muted"
                   >
-                    No Tax Found
+                    No Tax Records Found
                   </td>
 
                 </tr>
@@ -61,10 +69,34 @@ function TaxList({
 
                     <td>{index + 1}</td>
 
-                    <td>{item.taxName}</td>
+                    <td className="fw-semibold">
+                      {item.taxName}
+                    </td>
 
                     <td>
-                      {item.percentage}%
+
+                      <span className="badge bg-info text-dark">
+
+                        {item.taxType}
+
+                      </span>
+
+                    </td>
+
+                    <td>
+
+                      <span className="badge bg-primary">
+
+                        {item.percentage}%
+
+                      </span>
+
+                    </td>
+
+                    <td>
+
+                      {item.description || "-"}
+
                     </td>
 
                     <td>
@@ -85,10 +117,10 @@ function TaxList({
 
                     <td>
 
-                      <div className="d-flex gap-2">
+                      <div className="d-flex flex-column flex-md-row gap-2">
 
                         <button
-                          className="btn btn-warning btn-sm"
+                          className="btn btn-warning btn-sm flex-fill"
                           onClick={() =>
                             handleEdit(item)
                           }
@@ -97,7 +129,7 @@ function TaxList({
                         </button>
 
                         <button
-                          className="btn btn-danger btn-sm"
+                          className="btn btn-danger btn-sm flex-fill"
                           onClick={() =>
                             handleDelete(item.id)
                           }

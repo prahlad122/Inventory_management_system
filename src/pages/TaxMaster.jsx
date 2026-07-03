@@ -4,23 +4,27 @@ import TaxList from "../components/TaxList";
 
 function TaxMaster() {
 
-  // ==========================
-  // State
-  // ==========================
+  // =====================================
+  // States
+  // =====================================
 
   const [taxes, setTaxes] = useState([]);
 
   const [taxName, setTaxName] = useState("");
 
+  const [taxType, setTaxType] = useState("GST");
+
   const [percentage, setPercentage] = useState("");
+
+  const [description, setDescription] = useState("");
 
   const [status, setStatus] = useState(false);
 
   const [editId, setEditId] = useState(null);
 
-  // ==========================
-  // Load Data
-  // ==========================
+  // =====================================
+  // Load LocalStorage
+  // =====================================
 
   useEffect(() => {
 
@@ -31,9 +35,9 @@ function TaxMaster() {
 
   }, []);
 
-  // ==========================
-  // Save Data
-  // ==========================
+  // =====================================
+  // Save LocalStorage
+  // =====================================
 
   useEffect(() => {
 
@@ -44,9 +48,9 @@ function TaxMaster() {
 
   }, [taxes]);
 
-  // ==========================
+  // =====================================
   // Submit
-  // ==========================
+  // =====================================
 
   const handleSubmit = (e) => {
 
@@ -65,16 +69,16 @@ function TaxMaster() {
     if (editId !== null) {
 
       const updatedTaxes = taxes.map((item) =>
-
         item.id === editId
           ? {
               ...item,
               taxName,
+              taxType,
               percentage,
+              description,
               status,
             }
           : item
-
       );
 
       setTaxes(updatedTaxes);
@@ -89,7 +93,11 @@ function TaxMaster() {
 
         taxName,
 
+        taxType,
+
         percentage,
+
+        description,
 
         status,
 
@@ -99,43 +107,59 @@ function TaxMaster() {
 
     }
 
-    // Reset
+    resetForm();
+
+  };
+
+  // =====================================
+  // Reset Form
+  // =====================================
+
+  const resetForm = () => {
 
     setTaxName("");
 
+    setTaxType("GST");
+
     setPercentage("");
+
+    setDescription("");
 
     setStatus(false);
 
   };
 
-  // ==========================
+  // =====================================
   // Delete
-  // ==========================
+  // =====================================
 
   const handleDelete = (id) => {
 
-    if (window.confirm("Delete Tax ?")) {
+    if (window.confirm("Delete this Tax?")) {
 
-      const filtered = taxes.filter(
+      const updated = taxes.filter(
         (item) => item.id !== id
       );
 
-      setTaxes(filtered);
+      setTaxes(updated);
 
     }
 
   };
 
-  // ==========================
+  // =====================================
   // Edit
-  // ==========================
+  // =====================================
 
   const handleEdit = (item) => {
 
     setTaxName(item.taxName);
 
+    setTaxType(item.taxType);
+
     setPercentage(item.percentage);
+
+    setDescription(item.description);
 
     setStatus(item.status);
 
@@ -143,13 +167,15 @@ function TaxMaster() {
 
   };
 
-  // ==========================
+  // =====================================
   // JSX
-  // ==========================
+  // =====================================
 
   return (
 
     <div className="container-fluid py-4">
+
+      {/* Heading */}
 
       <div className="mb-4">
 
@@ -157,40 +183,48 @@ function TaxMaster() {
           Tax Master
         </h2>
 
-        <p className="text-muted">
-          Create, Update and Manage Taxes
+        <p className="text-muted mb-0">
+          Manage GST Rates for your Billing System
         </p>
 
       </div>
 
+      {/* Responsive Layout */}
+
       <div className="row g-4">
 
-        {/* Form */}
+        {/* Tax Form */}
 
-        <div className="col-xl-4 col-lg-5 col-md-12">
+        <div className="col-12 col-lg-5 col-xl-4">
 
           <TaxForm
 
             taxName={taxName}
             setTaxName={setTaxName}
 
+            taxType={taxType}
+            setTaxType={setTaxType}
+
             percentage={percentage}
             setPercentage={setPercentage}
+
+            description={description}
+            setDescription={setDescription}
 
             status={status}
             setStatus={setStatus}
 
-            handleSubmit={handleSubmit}
-
             editId={editId}
+
+            handleSubmit={handleSubmit}
 
           />
 
         </div>
 
-        {/* List */}
+        {/* Tax List */}
 
-        <div className="col-xl-8 col-lg-7 col-md-12">
+        <div className="col-12 col-lg-7 col-xl-8">
 
           <TaxList
 

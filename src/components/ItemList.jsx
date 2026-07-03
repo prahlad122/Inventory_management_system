@@ -7,25 +7,43 @@ function ItemList({
   handleDelete,
 }) {
 
-  const getCategory = (id) =>
-    categories.find((c) => c.id === id)?.categoryName || "-";
+  const getCategoryName = (id) => {
+    const category = categories.find(
+      (item) => item.id === id
+    );
 
-  const getSubCategory = (id) =>
-    subCategories.find((s) => s.id === id)?.subCategoryName || "-";
+    return category ? category.categoryName : "-";
+  };
+
+  const getSubCategoryName = (id) => {
+    const subCategory = subCategories.find(
+      (item) => item.id === id
+    );
+
+    return subCategory
+      ? subCategory.subCategoryName
+      : "-";
+  };
 
   const getTax = (id) => {
-    const tax = taxes.find((t) => t.id === id);
 
-    return tax
-      ? `${tax.taxName} (${tax.percentage}%)`
-      : "-";
+    const tax = taxes.find(
+      (item) => item.id === id
+    );
+
+    if (!tax) return "-";
+
+    return `${tax.taxName} (${tax.taxType} - ${tax.percentage}%)`;
+
   };
 
   return (
 
     <div className="card shadow border-0 rounded-4">
 
-      <div className="card-header bg-success text-white">
+      {/* Header */}
+
+      <div className="card-header bg-success text-white py-3">
 
         <h5 className="mb-0 fw-bold">
           Item List
@@ -33,11 +51,13 @@ function ItemList({
 
       </div>
 
+      {/* Body */}
+
       <div className="card-body">
 
         <div className="table-responsive">
 
-          <table className="table table-bordered table-hover align-middle">
+          <table className="table table-hover table-bordered align-middle">
 
             <thead className="table-dark">
 
@@ -49,9 +69,9 @@ function ItemList({
 
                 <th>Sub Category</th>
 
-                <th>Item</th>
+                <th>Item Name</th>
 
-                <th>SKU</th>
+                <th>Item Code</th>
 
                 <th>Purchase</th>
 
@@ -63,7 +83,9 @@ function ItemList({
 
                 <th>Status</th>
 
-                <th>Action</th>
+                <th width="150">
+                  Action
+                </th>
 
               </tr>
 
@@ -77,7 +99,7 @@ function ItemList({
 
                   <td
                     colSpan="11"
-                    className="text-center py-4"
+                    className="text-center py-4 text-muted"
                   >
                     No Items Found
                   </td>
@@ -92,26 +114,50 @@ function ItemList({
 
                     <td>{index + 1}</td>
 
-                    <td>{getCategory(item.categoryId)}</td>
+                    <td>
+                      {getCategoryName(item.categoryId)}
+                    </td>
 
-                    <td>{getSubCategory(item.subCategoryId)}</td>
+                    <td>
+                      {getSubCategoryName(
+                        item.subCategoryId
+                      )}
+                    </td>
 
-                    <td>{item.itemName}</td>
+                    <td className="fw-semibold">
+                      {item.itemName}
+                    </td>
 
-                    <td>{item.sku}</td>
+                    <td>
+                      {item.sku || "-"}
+                    </td>
 
-                    <td>₹ {item.purchasePrice}</td>
+                    <td>
+                      ₹ {item.purchasePrice}
+                    </td>
 
-                    <td>₹ {item.sellingPrice}</td>
+                    <td>
+                      ₹ {item.sellingPrice}
+                    </td>
 
-                    <td>{item.unit}</td>
+                    <td>
+                      {item.unit}
+                    </td>
 
-                    <td>{getTax(item.taxId)}</td>
+                    <td>
+
+                      <span className="badge bg-info text-dark">
+
+                        {getTax(item.taxId)}
+
+                      </span>
+
+                    </td>
 
                     <td>
 
                       <span
-                        className={`badge ${
+                        className={`badge rounded-pill px-3 py-2 ${
                           item.status
                             ? "bg-success"
                             : "bg-danger"
@@ -126,10 +172,10 @@ function ItemList({
 
                     <td>
 
-                      <div className="d-flex gap-2">
+                      <div className="d-flex flex-column flex-md-row gap-2">
 
                         <button
-                          className="btn btn-warning btn-sm"
+                          className="btn btn-warning btn-sm flex-fill"
                           onClick={() =>
                             handleEdit(item)
                           }
@@ -138,7 +184,7 @@ function ItemList({
                         </button>
 
                         <button
-                          className="btn btn-danger btn-sm"
+                          className="btn btn-danger btn-sm flex-fill"
                           onClick={() =>
                             handleDelete(item.id)
                           }
@@ -167,6 +213,7 @@ function ItemList({
     </div>
 
   );
+
 }
 
 export default ItemList;
