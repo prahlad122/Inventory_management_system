@@ -98,6 +98,15 @@ function Sidebar() {
                   Item Master
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/dashboard/master/customer"
+                  className={menuClass}
+                  onClick={closeSidebar}
+                >
+                  Customer Master
+                </NavLink>
+              </li>
             </ul>
           )}
         </li>

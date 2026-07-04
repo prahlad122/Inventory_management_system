@@ -3,7 +3,6 @@ import TaxForm from "../components/TaxForm";
 import TaxList from "../components/TaxList";
 
 function TaxMaster() {
-
   // =====================================
   // States
   // =====================================
@@ -27,12 +26,9 @@ function TaxMaster() {
   // =====================================
 
   useEffect(() => {
-
-    const storedTaxes =
-      JSON.parse(localStorage.getItem("taxes")) || [];
+    const storedTaxes = JSON.parse(localStorage.getItem("taxes")) || [];
 
     setTaxes(storedTaxes);
-
   }, []);
 
   // =====================================
@@ -40,12 +36,7 @@ function TaxMaster() {
   // =====================================
 
   useEffect(() => {
-
-    localStorage.setItem(
-      "taxes",
-      JSON.stringify(taxes)
-    );
-
+    localStorage.setItem("taxes", JSON.stringify(taxes));
   }, [taxes]);
 
   // =====================================
@@ -53,7 +44,6 @@ function TaxMaster() {
   // =====================================
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
 
     if (taxName.trim() === "") {
@@ -67,7 +57,6 @@ function TaxMaster() {
     }
 
     if (editId !== null) {
-
       const updatedTaxes = taxes.map((item) =>
         item.id === editId
           ? {
@@ -78,17 +67,14 @@ function TaxMaster() {
               description,
               status,
             }
-          : item
+          : item,
       );
 
       setTaxes(updatedTaxes);
 
       setEditId(null);
-
     } else {
-
       const newTax = {
-
         id: Date.now(),
 
         taxName,
@@ -100,15 +86,12 @@ function TaxMaster() {
         description,
 
         status,
-
       };
 
       setTaxes([...taxes, newTax]);
-
     }
 
     resetForm();
-
   };
 
   // =====================================
@@ -116,7 +99,6 @@ function TaxMaster() {
   // =====================================
 
   const resetForm = () => {
-
     setTaxName("");
 
     setTaxType("GST");
@@ -126,7 +108,6 @@ function TaxMaster() {
     setDescription("");
 
     setStatus(false);
-
   };
 
   // =====================================
@@ -134,17 +115,11 @@ function TaxMaster() {
   // =====================================
 
   const handleDelete = (id) => {
-
     if (window.confirm("Delete this Tax?")) {
-
-      const updated = taxes.filter(
-        (item) => item.id !== id
-      );
+      const updated = taxes.filter((item) => item.id !== id);
 
       setTaxes(updated);
-
     }
-
   };
 
   // =====================================
@@ -152,7 +127,6 @@ function TaxMaster() {
   // =====================================
 
   const handleEdit = (item) => {
-
     setTaxName(item.taxName);
 
     setTaxType(item.taxType);
@@ -164,7 +138,6 @@ function TaxMaster() {
     setStatus(item.status);
 
     setEditId(item.id);
-
   };
 
   // =====================================
@@ -172,78 +145,51 @@ function TaxMaster() {
   // =====================================
 
   return (
-
     <div className="container-fluid py-4">
-
       {/* Heading */}
 
       <div className="mb-4">
-
-        <h2 className="fw-bold">
-          Tax Master
-        </h2>
+        <h2 className="fw-bold">Tax Master</h2>
 
         <p className="text-muted mb-0">
           Manage GST Rates for your Billing System
         </p>
-
       </div>
 
       {/* Responsive Layout */}
 
       <div className="row g-4">
-
         {/* Tax Form */}
 
         <div className="col-12 col-lg-5 col-xl-4">
-
           <TaxForm
-
             taxName={taxName}
             setTaxName={setTaxName}
-
             taxType={taxType}
             setTaxType={setTaxType}
-
             percentage={percentage}
             setPercentage={setPercentage}
-
             description={description}
             setDescription={setDescription}
-
             status={status}
             setStatus={setStatus}
-
             editId={editId}
-
             handleSubmit={handleSubmit}
-
           />
-
         </div>
 
         {/* Tax List */}
 
         <div className="col-12 col-lg-7 col-xl-8">
-
           <TaxList
-
             taxes={taxes}
-
             handleEdit={handleEdit}
-
             handleDelete={handleDelete}
-
           />
-
         </div>
-
       </div>
-
     </div>
-
   );
-
 }
 
 export default TaxMaster;

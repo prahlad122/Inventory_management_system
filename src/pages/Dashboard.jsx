@@ -1,16 +1,12 @@
 function Dashboard() {
   return (
     <div className="container-fluid">
-
       <div className="mb-4">
         <h2 className="fw-bold">Dashboard</h2>
-        <p className="text-muted">
-          Welcome to Inventory Management System
-        </p>
+        <p className="text-muted">Welcome to Inventory Management System</p>
       </div>
 
       <div className="row g-4">
-
         <div className="col-lg-3 col-md-6">
           <div className="card shadow-sm">
             <div className="card-body">
@@ -46,9 +42,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   );
 }

@@ -8,8 +8,7 @@ function Layout() {
       <Header />
 
       <div className="d-flex">
-
-        <Sidebar  />
+        <Sidebar />
 
         <main
           className="flex-grow-1 bg-light p-4"
@@ -17,7 +16,6 @@ function Layout() {
         >
           <Outlet />
         </main>
-
       </div>
     </>
   );

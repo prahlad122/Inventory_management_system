@@ -7,7 +7,7 @@ import CategoryMaster from "./pages/CategoryMaster";
 import SubCategoryMaster from "./pages/SubCategoryMaster";
 import ItemMaster from "./pages/ItemMaster";
 import TaxMaster from "./pages/TaxMaster";
-
+import CustomerMaster from "./pages/CustomerMaster";
 import Transaction from "./pages/Transaction";
 import Report from "./pages/Report";
 
@@ -35,6 +35,7 @@ function App() {
         <Route path="master/item" element={<ItemMaster />} />
 
         <Route path="master/tax" element={<TaxMaster />} />
+        <Route path="/dashboard/master/customer" element={<CustomerMaster />} />
 
         <Route path="transaction" element={<Transaction />} />
 
