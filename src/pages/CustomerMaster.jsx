@@ -3,9 +3,8 @@ import CustomerForm from "../components/CustomerForm";
 import CustomerList from "../components/CustomerList";
 
 function CustomerMaster() {
-  // =====================================
+  
   // State
-  // =====================================
 
   const [customers, setCustomers] = useState([]);
 
@@ -29,9 +28,7 @@ function CustomerMaster() {
 
   const [editId, setEditId] = useState(null);
 
-  // =====================================
   // Load Data
-  // =====================================
 
   useEffect(() => {
     const storedCustomers = JSON.parse(localStorage.getItem("customers")) || [];
@@ -39,17 +36,13 @@ function CustomerMaster() {
     setCustomers(storedCustomers);
   }, []);
 
-  // =====================================
   // Save Data
-  // =====================================
 
   useEffect(() => {
     localStorage.setItem("customers", JSON.stringify(customers));
   }, [customers]);
 
-  // =====================================
   // Submit
-  // =====================================
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -131,9 +124,7 @@ function CustomerMaster() {
     resetForm();
   };
 
-  // =====================================
   // Reset Form
-  // =====================================
 
   const resetForm = () => {
     setCustomerName("");
@@ -155,9 +146,7 @@ function CustomerMaster() {
     setStatus(false);
   };
 
-  // =====================================
   // Delete
-  // =====================================
 
   const handleDelete = (id) => {
     if (window.confirm("Delete Customer ?")) {
@@ -167,9 +156,7 @@ function CustomerMaster() {
     }
   };
 
-  // =====================================
   // Edit
-  // =====================================
 
   const handleEdit = (item) => {
     setCustomerName(item.customerName);
@@ -193,9 +180,7 @@ function CustomerMaster() {
     setEditId(item.id);
   };
 
-  // =====================================
   // JSX
-  // =====================================
 
   return (
     <div className="container-fluid py-4">
