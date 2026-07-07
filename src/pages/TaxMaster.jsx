@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import TaxForm from "../components/TaxForm";
 import TaxList from "../components/TaxList";
 
-function TaxMaster() {
-  // =====================================
-  // States
-  // =====================================
+function TaxMaster() { 
+  // States 
 
   const [taxes, setTaxes] = useState([]);
 
@@ -20,28 +18,22 @@ function TaxMaster() {
   const [status, setStatus] = useState(false);
 
   const [editId, setEditId] = useState(null);
-
-  // =====================================
-  // Load LocalStorage
-  // =====================================
+ 
+  // Load LocalStorage 
 
   useEffect(() => {
     const storedTaxes = JSON.parse(localStorage.getItem("taxes")) || [];
 
     setTaxes(storedTaxes);
   }, []);
-
-  // =====================================
-  // Save LocalStorage
-  // =====================================
+ 
+  // Save LocalStorage 
 
   useEffect(() => {
     localStorage.setItem("taxes", JSON.stringify(taxes));
   }, [taxes]);
-
-  // =====================================
-  // Submit
-  // =====================================
+ 
+  // Submit 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -93,10 +85,8 @@ function TaxMaster() {
 
     resetForm();
   };
-
-  // =====================================
-  // Reset Form
-  // =====================================
+ 
+  // Reset Form 
 
   const resetForm = () => {
     setTaxName("");
@@ -109,10 +99,8 @@ function TaxMaster() {
 
     setStatus(false);
   };
-
-  // =====================================
-  // Delete
-  // =====================================
+ 
+  // Delete 
 
   const handleDelete = (id) => {
     if (window.confirm("Delete this Tax?")) {
@@ -121,10 +109,8 @@ function TaxMaster() {
       setTaxes(updated);
     }
   };
-
-  // =====================================
-  // Edit
-  // =====================================
+ 
+  // Edit 
 
   const handleEdit = (item) => {
     setTaxName(item.taxName);
@@ -139,17 +125,15 @@ function TaxMaster() {
 
     setEditId(item.id);
   };
-
-  // =====================================
-  // JSX
-  // =====================================
+ 
+  // JSX 
 
   return (
-    <div className="container-fluid py-4">
+    <div className="container-fluid py-3 py-md-4 px-3 px-md-4">
       {/* Heading */}
 
-      <div className="mb-4">
-        <h2 className="fw-bold">Tax Master</h2>
+      <div className="mb-3 mb-md-4 text-center text-md-start">
+        <h2 className="fw-bold mb-1">Tax Master</h2>
 
         <p className="text-muted mb-0">
           Manage GST Rates for your Billing System
@@ -158,7 +142,7 @@ function TaxMaster() {
 
       {/* Responsive Layout */}
 
-      <div className="row g-4">
+      <div className="row g-3 g-lg-4">
         {/* Tax Form */}
 
         <div className="col-12 col-lg-5 col-xl-4">

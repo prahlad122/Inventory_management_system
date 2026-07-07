@@ -1,48 +1,52 @@
 function TaxList({ taxes, handleEdit, handleDelete }) {
   return (
-    <div className="card shadow border-0 rounded-4">
+    <div className="card shadow border-0 rounded-4 h-100">
       {/* Card Header */}
 
-      <div className="card-header bg-success text-white py-3">
-        <h5 className="mb-0 fw-bold">Tax List</h5>
+      <div className="card-header bg-success text-white py-3 px-3 px-md-4">
+        <h5 className="mb-0 fw-bold text-center text-md-start">
+          Tax List
+        </h5>
       </div>
 
       {/* Card Body */}
 
-      <div className="card-body">
+      <div className="card-body p-2 p-sm-3 p-md-4">
         <div className="table-responsive">
-          <table className="table table-hover table-bordered align-middle">
-            <thead className="table-dark">
+          <table className="table table-hover table-bordered align-middle mb-0">
+            <thead className="table-dark text-center">
               <tr>
-                <th width="60">#</th>
+                <th style={{ minWidth: "60px" }}>#</th>
 
-                <th>Tax Name</th>
+                <th style={{ minWidth: "150px" }}>Tax Name</th>
 
-                <th>Tax Type</th>
+                <th style={{ minWidth: "140px" }}>Tax Type</th>
 
-                <th>GST %</th>
+                <th style={{ minWidth: "90px" }}>GST %</th>
 
-                <th>Description</th>
+                <th style={{ minWidth: "200px" }}>Description</th>
 
-                <th>Status</th>
+                <th style={{ minWidth: "110px" }}>Status</th>
 
-                <th width="150">Action</th>
+                <th style={{ minWidth: "120px" }}>Action</th>
               </tr>
             </thead>
 
             <tbody>
               {taxes.length === 0 ? (
                 <tr>
-                  <td colSpan="7" className="text-center py-4 text-muted">
+                  <td colSpan="7" className="text-center py-5 text-muted">
                     No Tax Records Found
                   </td>
                 </tr>
               ) : (
                 taxes.map((item, index) => (
                   <tr key={item.id}>
-                    <td>{index + 1}</td>
+                    <td className="text-center">{index + 1}</td>
 
-                    <td className="fw-semibold">{item.taxName}</td>
+                    <td className="fw-semibold text-break">
+                      {item.taxName}
+                    </td>
 
                     <td>
                       <span className="badge bg-info text-dark">
@@ -56,7 +60,9 @@ function TaxList({ taxes, handleEdit, handleDelete }) {
                       </span>
                     </td>
 
-                    <td>{item.description || "-"}</td>
+                    <td className="text-break">
+                      {item.description || "-"}
+                    </td>
 
                     <td>
                       <span
@@ -69,16 +75,16 @@ function TaxList({ taxes, handleEdit, handleDelete }) {
                     </td>
 
                     <td>
-                      <div className="d-flex flex-column flex-md-row gap-2">
+                      <div className="d-flex justify-content-center gap-2 flex-nowrap">
                         <button
-                          className="btn btn-warning btn-sm flex-fill"
+                          className="btn btn-warning btn-sm"
                           onClick={() => handleEdit(item)}
                         >
                           <i className="bi bi-pencil-square"></i>
                         </button>
 
                         <button
-                          className="btn btn-danger btn-sm flex-fill"
+                          className="btn btn-danger btn-sm"
                           onClick={() => handleDelete(item.id)}
                         >
                           <i className="bi bi-trash"></i>

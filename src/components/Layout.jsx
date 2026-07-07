@@ -7,11 +7,11 @@ function Layout() {
     <>
       <Header />
 
-      <div className="d-flex">
+      <div className="d-flex flex-column flex-lg-row">
         <Sidebar />
 
         <main
-          className="flex-grow-1 bg-light p-4"
+          className="flex-grow-1 bg-light p-3 p-md-4 w-100"
           style={{ minHeight: "100vh" }}
         >
           <Outlet />

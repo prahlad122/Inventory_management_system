@@ -19,16 +19,18 @@ function TaxForm({
   editId,
 }) {
   return (
-    <div className="card shadow border-0 rounded-4">
+    <div className="card shadow border-0 rounded-4 h-100">
       {/* Card Header */}
 
-      <div className="card-header bg-primary text-white py-3">
-        <h5 className="mb-0 fw-bold">{editId ? "Update Tax" : "Create Tax"}</h5>
+      <div className="card-header bg-primary text-white py-3 px-3 px-md-4">
+        <h5 className="mb-0 fw-bold text-center text-md-start">
+          {editId ? "Update Tax" : "Create Tax"}
+        </h5>
       </div>
 
       {/* Card Body */}
 
-      <div className="card-body">
+      <div className="card-body p-3 p-sm-4">
         <form onSubmit={handleSubmit}>
           {/* Tax Name */}
 
@@ -40,7 +42,7 @@ function TaxForm({
             <input
               type="text"
               className="form-control"
-              placeholder="Example : GST 18%"
+              placeholder="Example: GST 18%"
               value={taxName}
               onChange={(e) => setTaxName(e.target.value)}
             />
@@ -59,11 +61,8 @@ function TaxForm({
               onChange={(e) => setTaxType(e.target.value)}
             >
               <option value="GST">GST</option>
-
               <option value="IGST">IGST</option>
-
               <option value="CGST + SGST">CGST + SGST</option>
-
               <option value="Exempt">Exempt</option>
             </select>
           </div>
@@ -72,8 +71,7 @@ function TaxForm({
 
           <div className="mb-3">
             <label className="form-label fw-semibold">
-              GST Percentage
-              <span className="text-danger">*</span>
+              GST Percentage <span className="text-danger">*</span>
             </label>
 
             <select
@@ -82,15 +80,10 @@ function TaxForm({
               onChange={(e) => setPercentage(e.target.value)}
             >
               <option value="">Select GST Rate</option>
-
               <option value="0">0%</option>
-
               <option value="5">5%</option>
-
               <option value="12">12%</option>
-
               <option value="18">18%</option>
-
               <option value="28">28%</option>
             </select>
           </div>
@@ -121,7 +114,10 @@ function TaxForm({
                 onChange={(e) => setStatus(e.target.checked)}
               />
 
-              <label htmlFor="status" className="form-check-label fw-semibold">
+              <label
+                htmlFor="status"
+                className="form-check-label fw-semibold"
+              >
                 Active
               </label>
             </div>
@@ -131,7 +127,9 @@ function TaxForm({
 
           <button
             type="submit"
-            className={`btn ${editId ? "btn-warning" : "btn-primary"} w-100`}
+            className={`btn ${
+              editId ? "btn-warning" : "btn-primary"
+            } w-100 py-2 fw-semibold`}
           >
             {editId ? "Update Tax" : "Save Tax"}
           </button>
