@@ -1,5 +1,5 @@
 # 📦 Inventory Management & Billing System
-
+live link - https://inventoryhub1.netlify.app
 A full-stack **Inventory Management & Billing System** built using the **MERN Stack**. The application helps businesses efficiently manage inventory, categories, taxes, items, and transactions while providing secure authentication and a responsive user experience.
 
 ## 🚀 Features
