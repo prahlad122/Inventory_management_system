@@ -4,6 +4,9 @@ import morgan from "morgan";
 import authRoutes from "./routes/authRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import subCategoryRoutes from "./routes/subCategoryRoutes.js";
+import taxRoutes from "./routes/taxRoutes.js";
+import itemRoutes from "./routes/itemRoutes.js";
+import customerRoutes from "./routes/customerRoutes.js";
 import errorHandler from "./middleware/errorMiddleware.js";
 
 
@@ -30,6 +33,9 @@ app.use(morgan("dev"));
 app.use("/api/auth", authRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/subcategory", subCategoryRoutes);
+app.use("/api/tax", taxRoutes);
+app.use("/api/item", itemRoutes);
+app.use("/api/customer", customerRoutes);
 
 
 app.use(errorHandler);

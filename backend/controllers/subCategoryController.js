@@ -11,7 +11,6 @@ import ApiError from "../utils/ApiError.js";
 // =====================================================
 
 export const createSubCategory = asyncHandler(async (req, res) => {
-
   const { categoryId, subCategoryName, status } = req.body;
 
   // Validation
@@ -50,7 +49,6 @@ export const createSubCategory = asyncHandler(async (req, res) => {
   }
 
   const subCategory = await SubCategory.create({
-
     categoryId,
 
     subCategoryName: subCategoryName.trim().toUpperCase(),
@@ -62,19 +60,15 @@ export const createSubCategory = asyncHandler(async (req, res) => {
     entryUserId: req.user._id,
 
     entryDate: new Date(),
-
   });
 
   res.status(201).json({
-
     success: true,
 
     message: "Sub Category created successfully.",
 
     data: subCategory,
-
   });
-
 });
 
 // =====================================================
@@ -84,13 +78,22 @@ export const createSubCategory = asyncHandler(async (req, res) => {
 // =====================================================
 
 export const getSubCategories = asyncHandler(async (req, res) => {
+  
+  // Default filter
+  const filter = {
+    companyId: req.user.companyId,
+    isDeleted: false,
+  };
+
+   
+  if (req.query.categoryId) {
+    filter.categoryId = req.query.categoryId;
+  }
 
   const subCategories = await SubCategory.find({
-
     companyId: req.user.companyId,
 
     isDeleted: false,
-
   })
 
     .populate("categoryId", "categoryName")
@@ -98,15 +101,12 @@ export const getSubCategories = asyncHandler(async (req, res) => {
     .sort({ createdAt: -1 });
 
   res.status(200).json({
-
     success: true,
 
     count: subCategories.length,
 
     data: subCategories,
-
   });
-
 });
 
 // =====================================================
@@ -116,15 +116,12 @@ export const getSubCategories = asyncHandler(async (req, res) => {
 // =====================================================
 
 export const getSubCategoryById = asyncHandler(async (req, res) => {
-
   const subCategory = await SubCategory.findOne({
-
     _id: req.params.id,
 
     companyId: req.user.companyId,
 
     isDeleted: false,
-
   }).populate("categoryId", "categoryName");
 
   if (!subCategory) {
@@ -132,13 +129,10 @@ export const getSubCategoryById = asyncHandler(async (req, res) => {
   }
 
   res.status(200).json({
-
     success: true,
 
     data: subCategory,
-
   });
-
 });
 
 // =====================================================
@@ -148,7 +142,6 @@ export const getSubCategoryById = asyncHandler(async (req, res) => {
 // =====================================================
 
 export const updateSubCategory = asyncHandler(async (req, res) => {
-
   const { categoryId, subCategoryName, status } = req.body;
 
   if (!categoryId) {
@@ -160,13 +153,11 @@ export const updateSubCategory = asyncHandler(async (req, res) => {
   }
 
   const subCategory = await SubCategory.findOne({
-
     _id: req.params.id,
 
     companyId: req.user.companyId,
 
     isDeleted: false,
-
   });
 
   if (!subCategory) {
@@ -174,7 +165,6 @@ export const updateSubCategory = asyncHandler(async (req, res) => {
   }
 
   const duplicate = await SubCategory.findOne({
-
     categoryId,
 
     subCategoryName: subCategoryName.trim().toUpperCase(),
@@ -184,7 +174,6 @@ export const updateSubCategory = asyncHandler(async (req, res) => {
     isDeleted: false,
 
     _id: { $ne: req.params.id },
-
   });
 
   if (duplicate) {
@@ -193,8 +182,7 @@ export const updateSubCategory = asyncHandler(async (req, res) => {
 
   subCategory.categoryId = categoryId;
 
-  subCategory.subCategoryName =
-    subCategoryName.trim().toUpperCase();
+  subCategory.subCategoryName = subCategoryName.trim().toUpperCase();
 
   subCategory.status = status;
 
@@ -205,15 +193,12 @@ export const updateSubCategory = asyncHandler(async (req, res) => {
   await subCategory.save();
 
   res.status(200).json({
-
     success: true,
 
     message: "Sub Category updated successfully.",
 
     data: subCategory,
-
   });
-
 });
 
 // =====================================================
@@ -223,15 +208,12 @@ export const updateSubCategory = asyncHandler(async (req, res) => {
 // =====================================================
 
 export const deleteSubCategory = asyncHandler(async (req, res) => {
-
   const subCategory = await SubCategory.findOne({
-
     _id: req.params.id,
 
     companyId: req.user.companyId,
 
     isDeleted: false,
-
   });
 
   if (!subCategory) {
@@ -247,11 +229,8 @@ export const deleteSubCategory = asyncHandler(async (req, res) => {
   await subCategory.save();
 
   res.status(200).json({
-
     success: true,
 
     message: "Sub Category deleted successfully.",
-
   });
-
 });
